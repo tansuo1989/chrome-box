@@ -1,0 +1,47 @@
+{
+    "manifest_version": 2,
+
+    "name": "读点收藏",
+    "description": "读点收藏工具,把当前页面收藏到读点",
+    "version": "0.12",
+
+    "permissions": [
+        "http://*/*","https://*/*",
+        "tabs",
+        "contextMenus", //右键
+        "cookies" ,
+        "activeTab",
+        "desktopCapture"
+    ],
+    "icons": {
+          "16": "/pic/16.png",
+          "48": "/pic/48.png",
+          "128": "/pic/128.png"
+        },
+    // "content_scripts": [
+    // {
+    //   "matches": ["https://*/*","http://*/*"],
+    //   "css": ["/lib/style.css"],
+    //   "js": ["/lib/jquery.min.js", "content.js"]
+    // }
+  //],
+   "browser_action": {
+        "default_title": "读点收藏",
+        "default_popup": "popup.html"
+    },
+    "background": 
+    {
+        "scripts": ["/js/jquery.min.js","/js/background.js"]
+    }
+    //"options_page": "options.html",
+    // "page_action": {
+    //   "matches":["https://segmentfault.com/"],
+    //   "default_icon": "/pic/icon-48.png", // optional 
+    //   "default_title": "Do action",    // optional; shown in tooltip 
+    //   "default_popup": "popup.html"    // optional 
+    // }
+    // "web_accessible_resources": [
+    //     "catgate.logo.small.png"
+    // ]
+    
+}

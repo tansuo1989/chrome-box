@@ -23,7 +23,7 @@ $(".zm-item-answer img").each(function(){
     allimg.push($(this).attr("src"))
 })
 
-var url="http://localhost/php/img.php";
+var url="http://localhost/github/ddedu-collect/demo/img.php";
 
 console.log("loading...");
 

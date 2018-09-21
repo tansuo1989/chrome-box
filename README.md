@@ -6,7 +6,7 @@
 1. 下载： git clone https://github.com/tansuo1989/ddedu-collect.git
 2. 打开 chrome 浏览器的“管理拓展程序”的页面
 3. 选择“开发者模式”
-4. 点击“加载已解压的拓展程序...”后选择 ddedu-collect/dd 这个文件夹
+4. 点击“加载已解压的拓展程序...”后选择 ddedu-collect/src 这个文件夹
 5. 刷新后在任意网页中点击右键即可看到“收藏到读点”的选项，点击后即可收藏
 6. 若跳出读点的登录页面，请重新登录
 

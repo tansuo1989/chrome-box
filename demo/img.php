@@ -8,9 +8,9 @@ function mtime(){
     return str_replace(".","",microtime(true));
 }
 
-function save($data,$dir=false){
+function save($data,$dir="default"){
     if(!$data||count($data)==0){exit("fail:no imgs");}
-    $dir=$dir?:"./girls_good/";
+    $dir="./girls/".$dir."/";
     is_dir($dir)?:mkdir($dir);
     $i=0;
     $j=0;
@@ -28,4 +28,4 @@ function save($data,$dir=false){
     echo "succ:{$i},fail:{$j}";
 }
 
-save($p['imgs'],$p['dir']."/");
+save($p['imgs'],$p['dir']);

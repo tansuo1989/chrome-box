@@ -6,9 +6,10 @@
     "version": "0.12",
 
     "permissions": [
-        "http://*/*","https://*/*",
+        "http://*/*",
+        "https://*/*",
         "tabs",
-        "contextMenus", //右键
+        "contextMenus",
         "cookies" ,
         "activeTab",
         "desktopCapture"
@@ -18,30 +19,32 @@
           "48": "/pic/48.png",
           "128": "/pic/128.png"
         },
-    // "content_scripts": [
-    // {
-    //   "matches": ["https://*/*","http://*/*"],
-    //   "css": ["/lib/style.css"],
-    //   "js": ["/lib/jquery.min.js", "content.js"]
-    // }
-  //],
+    "content_scripts": [
+        {
+        "matches": ["https://*/*","http://*/*"],
+        "css": ["/css/style.css"],
+        "js": ["js/jquery.min.js", "/js/fun.js","/js/content.js"],
+	     "run_at": "document_end"
+        }
+    ],
    "browser_action": {
         "default_title": "读点收藏",
-        "default_popup": "popup.html"
+        "default_popup": "./html/popup.html"
     },
     "background": 
     {
-        "scripts": ["/js/jquery.min.js","/js/background.js"]
-    }
-    //"options_page": "options.html",
+        "scripts": ["/js/jquery.min.js","/js/fun.js","/js/background.js"]
+    },
+    // "options_page": "options.html",
+    //page_action与browser_action不能同时使用，显示在地址栏
     // "page_action": {
-    //   "matches":["https://segmentfault.com/"],
-    //   "default_icon": "/pic/icon-48.png", // optional 
-    //   "default_title": "Do action",    // optional; shown in tooltip 
-    //   "default_popup": "popup.html"    // optional 
-    // }
-    // "web_accessible_resources": [
-    //     "catgate.logo.small.png"
-    // ]
+    //   "matches":["https://*/*","http://*/*"],
+    //   "default_icon": "/pic/48.png", 
+    //   "default_title": "my js",  
+    //   "default_popup": "/html/popup.html" 
+    // },
+    "web_accessible_resources": [
+        "catgate.logo.small.png"
+    ]
     
 }

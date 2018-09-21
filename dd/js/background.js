@@ -53,4 +53,10 @@ function mysend(data){
 	})
 }
 
-
+//返回 localStorage中存的代码
+chrome.extension.onRequest.addListener(
+    function(request, sender, sendResponse) {
+        var code=localStorage.getItem("code");
+        var data={code:code,req:request,from:"background.js",sender:sender};
+        sendResponse(data);
+})

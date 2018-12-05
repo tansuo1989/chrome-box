@@ -35,7 +35,7 @@
     {
         "scripts": ["/js/jquery.min.js","/js/background.js"]
     },
-    // "options_page": "options.html",
+    "options_page": "html/options.html",
     //page_action与browser_action不能同时使用，显示在地址栏
     // "page_action": {
     //   "matches":["https://*/*","http://*/*"],

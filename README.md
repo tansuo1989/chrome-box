@@ -1,6 +1,12 @@
 # ddedu-collect
 读点右键收藏工具，chrome拓展程序
 
+# 功能
+1. 右键收藏链接到读点
+2. 动态地在浏览器中注入js代码，支持jQuery.js
+3. 添加鼠标手势的功能
+
+
 # 使用方法
 
 1. 下载： git clone https://github.com/tansuo1989/ddedu-collect.git
@@ -16,5 +22,9 @@
 
 # 更新：
 * 添加了直接在浏览器中添加 js 代码，可以在任意页面中执行，区别于 console 中最重要的一点是它可以在不同的页面跳转并自动执行
+
+# todo
+1. 开发配置选项，支持个性化配置
+
 
 

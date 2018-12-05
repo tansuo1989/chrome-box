@@ -23,7 +23,7 @@
         {
         "matches": ["https://*/*","http://*/*"],
         "css": ["/css/style.css"],
-        "js": ["js/jquery.min.js", "/js/fun.js","/js/content.js"],
+        "js": ["js/jquery.min.js","js/gesture.js", "/js/content.js"],
 	     "run_at": "document_end"
         }
     ],
@@ -33,7 +33,7 @@
     },
     "background": 
     {
-        "scripts": ["/js/jquery.min.js","/js/fun.js","/js/background.js"]
+        "scripts": ["/js/jquery.min.js","/js/background.js"]
     },
     // "options_page": "options.html",
     //page_action与browser_action不能同时使用，显示在地址栏

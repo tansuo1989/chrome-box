@@ -18,3 +18,22 @@ chrome.extension.onRequest.addListener(
         }
 })
 
+//鼠标手势
+var bg = new BrowserGesture()
+bg.chrome_totop=()=>{
+  $("body,html").animate({
+      scrollTop:0
+  },100)
+}
+bg.chrome_tobottom=()=>{
+    $("body,html").animate({
+        scrollTop:$("body").height(),
+    },100)
+}
+bg.chrome_toback=()=>{
+    history.back();
+}
+bg.chrome_close=()=>{
+    window.location.href="about:blank"; //有一定概率打开这个空白页面后并没有关闭
+    window.close();
+}

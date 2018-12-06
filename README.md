@@ -1,4 +1,4 @@
-# ddedu-collect
+# dd-box
 读点工具，chrome拓展程序
 (改名为dd-box)
 

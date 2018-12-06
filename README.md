@@ -1,6 +1,6 @@
 # ddedu-collect
 读点工具，chrome拓展程序
-(改名为dd_box)
+(改名为dd-box)
 
 # 功能
 1. 右键收藏链接到读点

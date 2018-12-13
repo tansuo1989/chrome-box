@@ -10,13 +10,13 @@ $.ajaxSetup({
 	dataType:"json"
 });
 
-console.log("config",)
+// console.log("config",)
 var config=localStorage.getItem("config");
 if(config){
     config=JSON.parse(config);
     if(config.is_collect==1){
         //右键收藏
-        console.log("collect")
+        // console.log("collect")
         chrome.contextMenus.create({
             title: "收藏到读点", 
             type: "normal", 
@@ -65,8 +65,21 @@ function mysend(data){
 //返回 localStorage中存的代码
 chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
-        var code=localStorage.getItem("code");
-        var config=localStorage.getItem("config");
-        var data={code:code,config:config,req:request,from:"background.js",sender:sender};
-        sendResponse(data);
+        var action=request.action;
+        if(action=="getcode"){
+            var code=localStorage.getItem("code");
+            var config=localStorage.getItem("config");
+            var data={code:code,config:config,req:request,from:"background.js",sender:sender};
+            sendResponse(data);
+        }else if(action=="close"){
+            chrome.tabs.remove(sender.tab.id)//关闭当前标签页
+        }    
 })
+
+console.log("tabs",chrome.tabs)
+chrome.tabs.onCreated.addListener(function(a,b,c){
+    console.log("listen",a,b,c)
+})
+
+
+

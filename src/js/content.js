@@ -1,7 +1,7 @@
 //网页内执行的代码
 
 //获取代码并执行
-chrome.extension.sendRequest({name:"haha"},function(d){
+chrome.extension.sendRequest({action:"getcode"},function(d){
     var code=JSON.parse(d.code);
     var config=JSON.parse(d.config);
     if(config.is_gesture==1){
@@ -39,7 +39,13 @@ function set_gesture(){
         history.back();
     }
     bg.chrome_close=()=>{
-        window.location.href="about:blank"; //有一定概率打开这个空白页面后并没有关闭
-        window.close();
+        // window.location.href="about:blank"; //有一定概率打开这个空白页面后并没有关闭
+        // window.close(); 使用下面的方法，可以解决上述bug
+        chrome.extension.sendRequest({action:"close"},d=>{
+            console.log("close.back:",d);
+        })
     }
 }
+
+
+ 

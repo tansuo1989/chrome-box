@@ -1,10 +1,9 @@
 
 var host="http://www.tansuo19.top/index.php?s=";
 //点击拓展图标后,这在popup开启后，应该是无效的
-chrome.browserAction.onClicked.addListener(function(d)
-{  
-    dd(d.title,d.url);
-});
+// chrome.browserAction.onClicked.addListener(function(d){  
+//     dd(d.title,d.url);
+// });
 
 $.ajaxSetup({
 	dataType:"json"
@@ -76,10 +75,8 @@ chrome.extension.onRequest.addListener(
         }    
 })
 
-console.log("tabs",chrome.tabs)
-chrome.tabs.onCreated.addListener(function(a,b,c){
-    console.log("listen",a,b,c)
-})
+
+
 
 
 

@@ -3,5 +3,7 @@
 *.jpeg
 *.gif
 
+*.pem
+
 /demo/girls/
 

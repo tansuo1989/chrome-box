@@ -1,24 +1,32 @@
 
 var host="http://www.tansuo19.top/index.php?s=";
-//点击拓展图标后
-chrome.browserAction.onClicked.addListener(function(d)
-{  
-    dd(d.title,d.url);
-});
+//点击拓展图标后,这在popup开启后，应该是无效的
+// chrome.browserAction.onClicked.addListener(function(d){  
+//     dd(d.title,d.url);
+// });
 
 $.ajaxSetup({
 	dataType:"json"
-  });
-
-  
-//右键
-chrome.contextMenus.create({
-	title: "收藏到读点", 
-	type: "normal", 
-	onclick:function(info,tab){
-     dd(tab.title,tab.url);
-    }
 });
+
+// console.log("config",)
+var config=localStorage.getItem("config");
+if(config){
+    config=JSON.parse(config);
+    if(config.is_collect==1){
+        //右键收藏
+        // console.log("collect")
+        chrome.contextMenus.create({
+            title: "收藏到读点", 
+            type: "normal", 
+            onclick:function(info,tab){
+                dd(tab.title,tab.url);
+            }
+        });
+    }
+}
+  
+
 
 function dd(title,url){
 	var data={
@@ -56,7 +64,19 @@ function mysend(data){
 //返回 localStorage中存的代码
 chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
-        var code=localStorage.getItem("code");
-        var data={code:code,req:request,from:"background.js",sender:sender};
-        sendResponse(data);
+        var action=request.action;
+        if(action=="getcode"){
+            var code=localStorage.getItem("code");
+            var config=localStorage.getItem("config");
+            var data={code:code,config:config,req:request,from:"background.js",sender:sender};
+            sendResponse(data);
+        }else if(action=="close"){
+            chrome.tabs.remove(sender.tab.id)//关闭当前标签页
+        }    
 })
+
+
+
+
+
+

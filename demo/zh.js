@@ -10,7 +10,7 @@
 // if(location.path!="/collection/"+colid){return;}
 
 
-var url="https://www.zhihu.com/collection/123354652";
+var url="https://www.zhihu.com/collection/36731404";
 if(location.href.search(url)==-1){return;}
 var dirname="coll_1";
 
@@ -25,14 +25,13 @@ $(".zm-item-answer img").each(function(){
 
 var url="http://localhost/github/ddedu-collect/demo/img.php";
 
-console.log("loading...");
+console.log("loading...,count:",allimg.length);
 
 var data={imgs:allimg,dir:dirname};
 $.post(url,data,function(d){
     console.log(d);
     var next= $(".zm-invite-pager span:last-child").find("a");
-    console.log(next)
-    if(next){
+    if(next.length>0){
         next.get(0).click();
     }else{
         alert("完成了");

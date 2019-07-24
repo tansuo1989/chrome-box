@@ -8,24 +8,34 @@ var host="http://www.tansuo19.top/index.php?s=";
 $.ajaxSetup({
 	dataType:"json"
 });
-
-// console.log("config",)
-var config=localStorage.getItem("config");
-if(config){
-    config=JSON.parse(config);
-    if(config.is_collect==1){
-        //右键收藏
-        // console.log("collect")
-        chrome.contextMenus.create({
-            title: "收藏到读点", 
-            type: "normal", 
-            onclick:function(info,tab){
-                dd(tab.title,tab.url);
-            }
-        });
-    }
+var config=get_config();
+/* 
+config={
+    is_collect:1 是否启用收藏
+    is_gesture:1 是否启用手势
+    is_code:1 是否执行驻入代码
+    show:"qrcode"/"input" 先展开二维码或输入框
 }
-  
+*/
+
+//右键收藏
+if(config&&config.is_collect==1){
+    chrome.contextMenus.create({
+        title: "收藏到读点", 
+        type: "normal", 
+        onclick:function(info,tab){
+            dd(tab.title,tab.url);
+        }
+    });
+}
+
+function get_config(){
+    var config=localStorage.getItem("config");
+    if(config){
+        return JSON.parse(config);
+    }
+    return false;
+}
 
 
 function dd(title,url){
@@ -35,7 +45,7 @@ function dd(title,url){
 	}
 	chrome.cookies.get({
 		url:host,
-		name:"token"
+		name:"token",
 	},function(d){
 		console.log(d);
 		if(d&&d.value){

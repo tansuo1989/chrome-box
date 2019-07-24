@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
+<title>dd-box</title>
 <style>
 .container{width:400px;}
 .code{width:100%;min-height:200px;}
+.qrcode{text-align: center;}
 </style>
 </head>
 <body>
@@ -15,14 +16,18 @@
     <div class="row">
         <div class="col-md-12">
             <textarea class="code" placeholder="请把要注入页面中的 js 代码复制到这里"></textarea>
+            <div class="qrcode"></div>
         </div>
         <div class="col-md-12">
             <button class="btn btn-default sub">执行</button>
             <button class="btn btn-danger del">清空</button>
+            <button class="btn btn-info show-qrcode">显示二维码</button>
+            <button class="btn btn-info show-code">显示输入框</button>
         </div>
     </div>
 </div>    
 </body>
 </html>
 <script src="/lib/jquery.min.js"></script>
+<script src="/lib/qrcode.js"></script>
 <script src="/js/popup.js"></script>

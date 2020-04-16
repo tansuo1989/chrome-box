@@ -48,4 +48,121 @@ function set_gesture(){
 }
 
 
+///百度知道添加关注和“我的关注”的功能
+var local={
+    get(key,def){
+        var re=localStorage.getItem(key);
+        return re?JSON.parse(re):(def?def:false);
+    },
+    set(key,value){
+        localStorage.setItem(key,JSON.stringify(value));
+    }
+}
+
+
+
+var baidu_know={};
+
+baidu_know.is_zhidao_question=function(){
+    var r=/zhidao.baidu.com\/question\/\d+.html/;
+    if(location.href.match(r)){
+        return true;
+    }
+    return false;
+}
+
+baidu_know.is_zhidao_center=function (){
+    if(location.href.match(/zhidao.baidu.com\/ihome\/homepage/)){
+        return true;
+    }
+    return false;
+}
+
+baidu_know.add_follow_btn=function(f){
+    var color=f==1?"white":"#eee";
+    var text=f==1?'关注':'已关注';
+    var style="border:1px solid #ddd;\
+               padding:.3rem .5rem;\
+               margin-left:.5rem;\
+               background:'"+color+"';\
+               ";
+    var btn="<button style='"+style+"' class='follow_question'>"+text+"</button>";
+    $("#v-times").before(btn);
+}
+
+baidu_know.is_follow=function(url,old){
+     var len=old.length;
+     for(var i=0;i<len;i++){
+         if(old[i].url==url){
+             return true;
+         }
+     }
+     return false;
+}
+
+baidu_know.show_follow_list=function(){
+    var old=local.get("baidu_know_follow_list",[]);
+    var html="<div class='my-follow-list' style='padding-top:3rem;'>";
+    old.forEach((v,i)=>{
+        html+="<p>"+(i+1)+". <a href='"+v.url+"' target='_blank' style='color:black;padding:1rem;'>"+v.title+"</a> <span style='font-size:.8rem;color:#ddd;'>"+v.date+"</span></p>";
+    })
+    html+="</div>";
+    return html;
+}
+
+//问题详情页面
+if(baidu_know.is_zhidao_question()){
+    var d=new Date();
+    var url=location.href;
+    if(url.search(/\?/)!=-1){
+        var url_arr=url.split("?");
+        url=url_arr[0];
+    }
+    var data={
+        url:url,
+        title:document.title.replace("_百度知道",""),
+        date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),
+        time:d.getTime()/1000,
+    }
+    var old=local.get("baidu_know_follow_list",[]);
+    var f=baidu_know.is_follow(data.url,old);
+    f=f?0:1;
+    baidu_know.add_follow_btn(f);
+    $(".follow_question").click(function(){
+        var text=$(this).text();
+        if(text=="关注"){
+            $(this).text("已关注");
+            $(this).css({background:'#eee'});
+            old.push(data);
+        }else{
+            $(this).text("关注");
+            $(this).css({background:'white'});
+            var len=old.length;
+            for(var i=0;i<len;i++){
+                if(old[i].url==data.url){
+                    old.splice(i,1);
+                    break;
+                }
+            }
+        }
+        local.set("baidu_know_follow_list",old);
+    })
+}
+
+//用户中心
+if(baidu_know.is_zhidao_center()){
+    var str="<li><a style='cursor:pointer;' class='myfollow'>我的关注</a></li>";
+    setTimeout(()=>{
+        console.log($('.main-content-submenu').length);
+        $('.main-content-submenu').eq(0).append(str);
+        $('.myfollow').on("click",function(){
+            $('.main-content-submenu').eq(0).find("a").removeClass("main-content-active");
+            $(this).addClass("main-content-active");
+            $("main").hide();
+            var html=baidu_know.show_follow_list();
+            $("main").before(html);
+        })
+    },1000)
+}
+
  

@@ -103,9 +103,13 @@ baidu_know.is_follow=function(url,old){
 baidu_know.show_follow_list=function(){
     var old=local.get("baidu_know_follow_list",[]);
     var html="<div class='my-follow-list' style='padding-top:3rem;'>";
-    old.forEach((v,i)=>{
-        html+="<p>"+(i+1)+". <a href='"+v.url+"' target='_blank' style='color:black;padding:1rem;'>"+v.title+"</a> <span style='font-size:.8rem;color:#ddd;'>"+v.date+"</span></p>";
-    })
+    if(old.length==0){
+        html+="<p>暂无关注</p>";
+    }else{
+        old.forEach((v,i)=>{
+            html+="<p style='margin:.5rem 0;'>"+(i+1)+". <a href='"+v.url+"' target='_blank' style='color:black;'>"+v.title+"</a> <span style='font-size:.8rem;color:#ddd;'>"+v.date+"</span></p>";
+        })
+    }
     html+="</div>";
     return html;
 }

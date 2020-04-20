@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "读点工具箱",
-    "description": "功能：读点收藏，代码注入，鼠标手势",
+    "description": "功能：读点收藏，代码注入，鼠标手势,百度知道助手",
     "version": "0.12",
 
     "permissions": [
@@ -23,7 +23,7 @@
         {
         "matches": ["https://*/*","http://*/*"],
         "css": ["/css/style.css"],
-        "js": ["/lib/jquery.min.js","/lib/gesture.js", "/js/content.js"],
+        "js": ["/lib/jquery.min.js","/lib/gesture.js","/lib/fun.js", "/js/content.js"],
 	     "run_at": "document_end"
         }
     ],

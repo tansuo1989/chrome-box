@@ -48,19 +48,8 @@ function set_gesture(){
 }
 
 
+
 ///百度知道添加关注和“我的关注”的功能
-var local={
-    get(key,def){
-        var re=localStorage.getItem(key);
-        return re?JSON.parse(re):(def?def:false);
-    },
-    set(key,value){
-        localStorage.setItem(key,JSON.stringify(value));
-    }
-}
-
-
-
 var baidu_know={};
 
 baidu_know.is_zhidao_question=function(){
@@ -150,6 +139,37 @@ if(baidu_know.is_zhidao_question()){
             }
         }
         local.set("baidu_know_follow_list",old);
+    })
+    //百度知道问题详情图片切换 
+    function get_all_img(){
+        var all_img=[];
+        $('.q-img-li').each(function(){
+            let item=$(this).data("src");
+            all_img.push(item);
+        })
+        $.all_img=all_img;//绑定到$
+    }
+    get_all_img();
+    //左37,右39
+    $("body").on("keydown",d=>{
+        var now_img=$(".q-img-fullscreen-wraper img");
+        if($.all_img.length>0&&now_img.length>0){
+            if(d.keyCode==37||d.keyCode==39){
+                var index=-1;
+                $.all_img.forEach((v,i)=>{
+                    console.log(v,now_img.attr("src"))
+                    if(v==now_img.attr("src")){
+                        index=i;
+                    }
+                })
+                console.log("index",index)
+                if(d.keyCode==37&&index>0){
+                    $(".q-img-fullscreen-wraper img").attr("src",$.all_img[index-1]);
+                }else if(d.keyCode==39&&index<$.all_img.length-1){
+                    $(".q-img-fullscreen-wraper img").attr("src",$.all_img[index+1]);
+                }
+            }
+        }
     })
 }
 

@@ -53,7 +53,7 @@ function set_gesture(){
 var baidu_know={};
 
 baidu_know.is_zhidao_question=function(){
-    var r=/zhidao.baidu.com\/question\/\d+.html/;
+    var r=/zhidao\.baidu\.com\/question\/\d+/;
     if(location.href.match(r)){
         return true;
     }
@@ -141,18 +141,18 @@ if(baidu_know.is_zhidao_question()){
         local.set("baidu_know_follow_list",old);
     })
     //百度知道问题详情图片切换 
-    function get_all_img(){
+   !(function(){
         var all_img=[];
         $('.q-img-li').each(function(){
             let item=$(this).data("src");
             all_img.push(item);
         })
         $.all_img=all_img;//绑定到$
-    }
-    get_all_img();
+    })()
     //左37,右39
     $("body").on("keydown",d=>{
         var now_img=$(".q-img-fullscreen-wraper img");
+        // console.log(d.keyCode);
         if($.all_img.length>0&&now_img.length>0){
             if(d.keyCode==37||d.keyCode==39){
                 var index=-1;

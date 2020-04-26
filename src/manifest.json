@@ -25,6 +25,12 @@
         "css": ["/css/style.css"],
         "js": ["/lib/jquery.min.js","/lib/gesture.js","/lib/fun.js", "/js/content.js"],
 	     "run_at": "document_end"
+        },
+        {
+            "run_at":"document_start",
+            "matches": ["https://*/*","http://*/*"],
+            "js":["/js/start.js"]
+
         }
     ],
    "browser_action": {
@@ -45,7 +51,7 @@
     //   "default_popup": "/html/popup.html" 
     // },
     "web_accessible_resources": [
-        "catgate.logo.small.png"
+        "/js/baiduzhidao_question_detail.js"
     ]
     
 }

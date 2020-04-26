@@ -8,8 +8,9 @@ chrome.extension.sendRequest({action:"getcode"},function(d){
         set_gesture();
     }
     if(config.is_code==1){
-        var fn=new Function(code);
-        fn();
+        // var fn=new Function(code);
+        // fn();
+        eval(code);
     }
 })
 
@@ -79,6 +80,8 @@ baidu_know.add_follow_btn=function(f){
     $("#v-times").before(btn);
 }
 
+
+
 baidu_know.is_follow=function(url,old){
      var len=old.length;
      for(var i=0;i<len;i++){
@@ -140,6 +143,8 @@ if(baidu_know.is_zhidao_question()){
         }
         local.set("baidu_know_follow_list",old);
     })
+    //添加提问者信息的提问时间
+    fun.injectScript( chrome.extension.getURL('/js/baiduzhidao_question_detail.js'), 'head');
     //百度知道问题详情图片切换 
    !(function(){
         var all_img=[];
@@ -188,5 +193,3 @@ if(baidu_know.is_zhidao_center()){
         })
     },1000)
 }
-
- 

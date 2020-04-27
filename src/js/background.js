@@ -8,7 +8,7 @@ var host="http://www.tansuo19.top/index.php?s=";
 $.ajaxSetup({
 	dataType:"json"
 });
-var config=get_config();
+var config=local.get("config",{});
 /* 
 config={
     is_collect:1 是否启用收藏
@@ -19,7 +19,7 @@ config={
 */
 
 //右键收藏
-if(config&&config.is_collect==1){
+if(config.is_collect==1){
     chrome.contextMenus.create({
         title: "收藏到读点", 
         type: "normal", 
@@ -27,14 +27,6 @@ if(config&&config.is_collect==1){
             dd(tab.title,tab.url);
         }
     });
-}
-
-function get_config(){
-    var config=localStorage.getItem("config");
-    if(config){
-        return JSON.parse(config);
-    }
-    return false;
 }
 
 

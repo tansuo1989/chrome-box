@@ -4,12 +4,9 @@ $(function(){
 init();
 
 function init(){
-    var code=localStorage.getItem("code");
-    $(".code").val(JSON.parse(code));
-    
-    var config=localStorage.getItem("config");
-    config=config?JSON.parse(config):"";
-    if(config&&config.show&&config.show=="input"){
+    $(".code").val(local.get("code",)+"");
+    var config=local.get("config");
+    if(config.show&&config.show=="input"){
         show("input");
     }else{
         show("qrcode");
@@ -52,7 +49,7 @@ $(".del").click(function(){
 
 $(".sub").click(function(){
     var text=$(".code").val();
-    localStorage.code=JSON.stringify(text);
+    local.set("code",text);
     chrome.tabs.getSelected(function(tabs){
         console.log(tabs)
         window.close();

@@ -39,7 +39,7 @@
     },
     "background": 
     {
-        "scripts": ["/lib/jquery.min.js","/js/background.js"]
+        "scripts": ["/lib/jquery.min.js","/lib/fun.js","/js/background.js"]
         // "page":"/html/background.html"
     },
     "options_page": "html/options.html",

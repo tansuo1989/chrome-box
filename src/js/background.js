@@ -68,8 +68,8 @@ chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
         var action=request.action;
         if(action=="getcode"){
-            var code=localStorage.getItem("code");
-            var config=localStorage.getItem("config");
+            var code=local.get("code");
+            var config=local.get("config");
             var data={code:code,config:config,req:request,from:"background.js",sender:sender};
             sendResponse(data);
         }else if(action=="close"){

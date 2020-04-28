@@ -2,15 +2,16 @@
 
 //获取代码并执行
 chrome.extension.sendRequest({action:"getcode"},function(d){
-    var code=JSON.parse(d.code);
-    var config=JSON.parse(d.config);
-    if(config.is_gesture==1){
+    // console.log(d);
+    if(d.config&&d.config.is_gesture==1){
         set_gesture();
     }
-    if(config.is_code==1){
+    if(d.config&&d.config.is_code==1){
         // var fn=new Function(code);
         // fn();
-        eval(code);
+        if(d.code){
+            eval(d.code);
+        }
     }
 })
 
@@ -182,7 +183,7 @@ if(baidu_know.is_zhidao_question()){
 if(baidu_know.is_zhidao_center()){
     var str="<li><a style='cursor:pointer;' class='myfollow'>我的关注</a></li>";
     setTimeout(()=>{
-        console.log($('.main-content-submenu').length);
+        // console.log($('.main-content-submenu').length);
         $('.main-content-submenu').eq(0).append(str);
         $('.myfollow').on("click",function(){
             $('.main-content-submenu').eq(0).find("a").removeClass("main-content-active");

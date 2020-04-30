@@ -13,16 +13,18 @@ var fun={
 }
 
 
-function add_question_info(){
+!(function add_question_info(){
     var page=window.F.context("page");
     var url="https://zhidao.baidu.com/usercenter?uid="+page.encodeUid;
     var date=fun.date_format(page.createTime);
     var xm=page.userName?page.userName:"no_name";
-    var html="<a href='"+url+"' target='_blank'>@"+xm+": "+date+"</a>";
+    var tags=page.tags;
+    console.log("tags",tags);
+    var html="<span><a href='"+url+"' target='_blank'>@"+xm+": "+date+"</a>  <br/> <span>tags: "+tags+"</span></span>";
     html=fun.parseElement(html);
     document.querySelector("#v-times").parentNode.appendChild(html);
-}
-add_question_info();
+})()
+
 
 
 

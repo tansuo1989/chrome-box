@@ -19,7 +19,7 @@ var fun={
     var date=fun.date_format(page.createTime);
     var xm=page.userName?page.userName:"no_name";
     var tags=page.tags;
-    console.log("tags",tags);
+    // console.log("tags",tags);
     var html="<span><a href='"+url+"' target='_blank'>@"+xm+": "+date+"</a>  <br/> <span>tags: "+tags+"</span></span>";
     html=fun.parseElement(html);
     document.querySelector("#v-times").parentNode.appendChild(html);

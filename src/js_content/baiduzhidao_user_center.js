@@ -52,9 +52,44 @@
         $(".my-comment").click(()=>{
             var html=get_comment_html();
             $(".my-show-area").html(html).show();
+            $('.comment-del').css({
+                fontSize:".8rem",
+                border:"1px solid #ddd",
+                padding:".1rem .3rem",
+                cursor:"pointer",
+            })
+            $(".comment-del").click(function(){
+                var key=$(this).attr("key");
+                var time=$(this).attr("time");
+                if(comment_del(key,time)){
+                    $(this).parent().remove();
+                }
+            })
         })
     }
     init();
+
+    function comment_del(key,time){
+        var list=local.get("baidu_comment_list",{});
+        if(key in list &&list[key].length>0){
+            for(let i=0,len=list[key].length;i<len;i++){
+                let v=list[key][i];
+                if(v.time==time){
+                    if(len>1){
+                        list[key].splice(i,1);
+                    }else{
+                        delete list[key];
+                    }
+                    local.set("baidu_comment_list",list);
+                    return true;
+                }
+            }
+            alert("删除失败");
+        }else{
+            alert("删除失败");
+        }
+        
+    }
 
 
      function show_follow_list(){
@@ -98,15 +133,18 @@
     function get_comment_html(){
         var list=get_comment_list();
         var html="<div class='my-follow-list'>";
+        var q_pre="https://zhidao.baidu.com/question/";
         if(list.length==0){
             html+="<p>暂无评论</p>";
         }else{
             var i=0;
-            html+="<h3>我的评论</h3>"
+            html+="<h3>我的评论，共"+list.length+"条</h3>"
             list.forEach((v)=>{
                 v.data.forEach((vv)=>{
                     i++;
-                    html+="<p style='margin:.5rem 0;'>"+i+". <a href='"+"https://zhidao.baidu.com/question/"+vv.qid+"' target='_blank' style='color:black;'>"+vv.comment+"</a> <span style='font-size:.8rem;color:#ddd;'>"+fun.date_format(vv.time/1000)+"</span></p>";
+                    html+="<p style='margin:.5rem 0;'>"+i+". <a href='"+q_pre+vv.qid+"' target='_blank' style='color:black;'>"+vv.comment+"</a> <span style='font-size:.8rem;color:#ddd;'>"+fun.date_format(vv.time/1000)+"</span>\
+                    <span class='comment-del' key='"+vv.qid+"_"+vv.aid+"' time='"+vv.time+"'>删除</span>\
+                    </p>";
                 })
                 
             })

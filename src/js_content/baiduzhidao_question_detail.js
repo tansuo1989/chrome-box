@@ -136,7 +136,7 @@ $("span.comment").on("click",function(){
         })
         //删除
         $("span.delete").on("click",function(){
-            var comment=$(this).parent().prev().html();
+            var comment=$(this).parent().prev().html().trim();
             setTimeout(()=>{
                 $(".reply-delete-dialog .submit").on("click",function(){
                     var list=local.get("baidu_comment_list",{});
@@ -144,7 +144,11 @@ $("span.comment").on("click",function(){
                         let len=list[key].length;
                         for(let i=0;i<len;i++){
                             if(list[key][i].comment==comment){
-                                list[key].splice(i,1);
+                                if(len>1){
+                                    list[key].splice(i,1);
+                                }else{
+                                    delete list[key];
+                                }
                                 local.set("baidu_comment_list",list);
                                 break;
                             }

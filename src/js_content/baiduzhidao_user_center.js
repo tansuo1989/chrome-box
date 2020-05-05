@@ -30,6 +30,7 @@
             padding:".5rem"
         })
         $('.my-show-area').css({
+            boxSizing: "border-box",
             width:"100%",
             height:"100vh",
             overflow:"auto",

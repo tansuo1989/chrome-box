@@ -8,7 +8,12 @@
     var xm=page.userName?page.userName:"匿名";
     var tags=page.tags;
     // console.log("tags",tags);
-    var html="<span><a href='"+url+"' target='_blank'>@"+xm+": "+date+"</a>  <br/> <span>标签: "+tags+"</span></span>";
+    if(page.userName){
+       url=" href='"+url+"' target='_blank'";
+    }else{
+       url="";
+    }
+    var html="<span><a"+url+">@"+xm+": "+date+"</a>  <br/> <span>标签: "+tags+"</span></span>";
     html=fun.parseElement(html);
     document.querySelector("#v-times").parentNode.appendChild(html);
 }())

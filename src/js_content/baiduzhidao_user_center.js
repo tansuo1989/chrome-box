@@ -44,8 +44,9 @@
         })
         $('.myfollow').on("click",function(){
             $(".my-show-area").show();
-            var html=show_follow_list();
-            $(".my-show-area").html(html);
+            follow_list_show();
+         
+
         })
         $(".my-close").click(()=>{
             $('.my-show-area').hide();
@@ -93,19 +94,42 @@
     }
 
 
-     function show_follow_list(){
-        var old=local.get("baidu_know_follow_list",[]);
+     function follow_list_show(){
+        var old=local.get(fun.local_key.baidu_follow_list,[]);
         var html="<div class='my-follow-list'>";
         if(old.length==0){
             html+="<p>暂无关注</p>";
         }else{
             html+="<h3>我的关注</h3>"
             old.forEach((v,i)=>{
-                html+="<p style='margin:.5rem 0;'>"+(i+1)+". <a href='"+v.url+"' target='_blank' style='color:black;'>"+v.title+"</a> <span style='font-size:.8rem;color:#ddd;'>"+v.date+"</span></p>";
+                html+="<p style='margin:.5rem 0;'>"+(i+1)+". <a href='"+v.url+"' target='_blank' style='color:black;'>"+v.title+"</a> <span style='font-size:.8rem;color:#ddd;'>"+v.date+"</span>\
+                <span class='follow-del' url='"+v.url+"'>删除</span>\
+                </p>";
             })
         }
         html+="</div>";
-        return html;
+        $(".my-show-area").html(html);
+        $('.follow-del').css({
+            fontSize:".8rem",
+            border:"1px solid #ddd",
+            padding:".1rem .3rem",
+            cursor:"pointer",
+        })
+        set_follow_del();
+    }
+    function set_follow_del(){
+        $(".follow-del").off().on("click",function(){
+            var url=$(this).attr("url");
+            var list=local.get(fun.local_key.baidu_follow_list,[]);
+            for(var i=0,len=list.length;i<len;i++){
+                if(list[i].url==url){
+                    list.splice(i,1);
+                    local.set(fun.local_key.baidu_follow_list,list);
+                    break;
+                }
+            }
+            follow_list_show();
+        })
     }
     function get_max_time(arr){
         var max=0;

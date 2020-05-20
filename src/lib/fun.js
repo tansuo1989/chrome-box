@@ -10,6 +10,9 @@ var local={
 }
 
 var fun={
+    local_key:{
+        baidu_follow_list:"baidu_know_follow_list",//
+    },
     $(el){
         return document.querySelector(el);
     },

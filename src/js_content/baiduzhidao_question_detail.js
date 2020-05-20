@@ -40,7 +40,7 @@ fun.insert_js(["/lib/fun.js",'/js/baiduzhidao_question_detail_insert.js']);
         date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),
         time:d.getTime()/1000,
     }
-    var old=local.get("baidu_know_follow_list",[]);
+    var old=local.get(fun.local_key.baidu_follow_list,[]);
     var f=baidu_know.is_follow(data.url,old);
     f=f?0:1;
     baidu_know.add_follow_btn(f);
@@ -61,7 +61,7 @@ fun.insert_js(["/lib/fun.js",'/js/baiduzhidao_question_detail_insert.js']);
                 }
             }
         }
-        local.set("baidu_know_follow_list",old);
+        local.set(fun.local_key.baidu_follow_list,old);
     })
 
     //百度知道问题详情图片切换 

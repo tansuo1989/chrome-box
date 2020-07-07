@@ -1,5 +1,5 @@
 
-var host="http://www.tansuo19.top/index.php?s=";
+
 //点击拓展图标后,这在popup开启后，应该是无效的
 // chrome.browserAction.onClicked.addListener(function(d){  
 //     dd(d.title,d.url);
@@ -12,6 +12,8 @@ var config=local.get("config",{});
 /* 
 config={
     is_collect:1 是否启用收藏
+    collect_url:"",
+    login_url:"",
     is_gesture:1 是否启用手势
     is_code:1 是否执行驻入代码
     show:"qrcode"/"input" 先展开二维码或输入框
@@ -19,7 +21,7 @@ config={
 */
 
 //右键收藏
-if(config.is_collect==1){
+if(config.is_collect==1 && config.collect_url){
     chrome.contextMenus.create({
         title: "收藏到读点", 
         type: "normal", 
@@ -44,14 +46,14 @@ function dd(title,url){
 			data.token=d.value;
 			mysend(data);
 		}else{
-			window.open(host+"/Note/login");	
+			window.open(config.login_url);	
 		}
 	})
 
 }
 
 function mysend(data){
-	$.post(host+"/Home/Collect/from_net",data,function(d){
+	$.post(config.collect_url,data,function(d){
 	   console.log(d);
 	   if(d.status!=1){
 		 if(d.info=="请先登录"){
@@ -70,7 +72,12 @@ chrome.extension.onRequest.addListener(
         if(action=="getcode"){
             var code=local.get("code");
             var config=local.get("config");
-            var data={code:code,config:config,req:request,from:"background.js",sender:sender};
+            var data={
+                code:code,
+                config:config,
+                req:request,from:"background.js",
+                sender:sender
+            };
             sendResponse(data);
         }else if(action=="close"){
             chrome.tabs.remove(sender.tab.id)//关闭当前标签页

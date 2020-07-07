@@ -27,6 +27,17 @@
               <p>收藏功能修改后，要重启浏览器后才能生效</p>
             </div>
 
+            <div class="form-group collect-more">
+                <label for="name">收藏请求接口URL</label>
+                <input type="text" class="form-control collect_url" placeholder="收藏后会向该URL发送token,title,url三个字段的数据">
+                <p>收藏后会向该 URL 发送 token，title，url 三个字段的数据</p>
+            </div>
+
+            <div class="form-group collect-more">
+                <label for="name">未登录时跳转的URL</label>
+                <input type="text" class="form-control login_url" placeholder="当不能获取到token时需要跳转登录的网址">
+            </div>
+
             <div class="form-group">
                 <label for="name">开启鼠标手势</label>
                 <select class="form-control is_gesture">

@@ -38,7 +38,7 @@ function dd(title,url){
 		url:url,
 	}
 	chrome.cookies.get({
-		url:host,
+		url:config.collect_url,
 		name:"token",
 	},function(d){
 		console.log(d);
@@ -57,7 +57,7 @@ function mysend(data){
 	   console.log(d);
 	   if(d.status!=1){
 		 if(d.info=="请先登录"){
-            window.open(host+"/Note/login");
+            window.open(config.login_url);
 		 }else{
 			 alert(d.info);
 		 }

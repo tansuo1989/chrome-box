@@ -50,6 +50,10 @@
         },{
             "matches":["https://zhidao.baidu.com/ihome/homepage/*"],
             "js":["js_content/baiduzhidao_user_center.js"]
+        },
+        {
+            "matches":["http://t.cn/*"],
+            "js":["js_content/sina.js"]
         }
     ]
 }

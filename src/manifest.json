@@ -54,6 +54,10 @@
         {
             "matches":["http://t.cn/*"],
             "js":["js_content/sina.js"]
+        },
+        {
+            "matches":["https://www.jianshu.com/go-wild?*"],
+            "js":["js_content/jianshu.js"]
         }
     ]
 }

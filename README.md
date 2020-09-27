@@ -1,6 +1,6 @@
 # Chrome-box
 读点工具，Chrome 拓展程序
-( 曾用名：dd-collect --> dd-box --> Chrome-box )
+( 曾用名：dd-collect --> dd-box --> Chrome-box --> chrome-box )
 
 # 功能
 1. 右键收藏链接到读点

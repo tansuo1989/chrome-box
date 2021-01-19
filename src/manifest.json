@@ -58,6 +58,10 @@
         {
             "matches":["https://www.jianshu.com/go-wild?*"],
             "js":["js_content/jianshu.js"]
+        },
+        {
+            "matches":["https://baijiahao.baidu.com/builder/*"],
+            "js":["js_content/baijiahao.js"]
         }
     ]
 }

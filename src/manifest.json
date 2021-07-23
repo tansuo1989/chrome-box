@@ -52,7 +52,7 @@
             "js":["js_content/baiduzhidao_user_center.js"]
         },
         {
-            "matches":["http://t.cn/*"],
+            "matches":["http://t.cn/*","http://weibo.cn/sinaurl*","https://weibo.cn/sinaurl*"],
             "js":["js_content/sina.js"]
         },
         {
